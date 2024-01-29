@@ -5,7 +5,13 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = new Server(server, {
+    cors: {
+        origin: '*',
+        //origin: ["https://chatsy-entry.netlify.app" , "https://chatsy-chat.netlify.app" , "https://official-entry-point.development98979.repl.co" , "https://chatsyonline.web.app"],
+        methods: ["GET", "POST"]
+    }
+});
 const port =  process.env.PORT;
 
 app.use(bodyParser.json());
